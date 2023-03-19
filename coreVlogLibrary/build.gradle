@@ -1,20 +1,18 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    namespace 'com.kgcorp.myvlogs'
+    namespace 'com.kgcorp.corevloglibrary'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.kgcorp.myvlogs"
         minSdk 24
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -30,10 +28,17 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion composeCompilerVersion
+        kotlinCompilerVersion kotlinVersion
+    }
 }
 
 dependencies {
-    api project(":coreVlogLibrary")
+
     implementation "androidx.core:core-ktx:$coreKotlinVersion"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "com.google.android.material:material:$googleMaterialVersion"
@@ -42,5 +47,15 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$junitExtVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
 
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation "androidx.compose.material:material:$composeVersion"
+    implementation "androidx.compose.material:material-icons-extended:$composeVersion"
+    implementation "androidx.compose.ui:ui-tooling-preview:$composeVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeVersion"
+    implementation "androidx.activity:activity-compose:$activityComposeVersion"
+    implementation "androidx.constraintlayout:constraintlayout-compose:$composeConstraintLayoutVersion"
 
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
+    debugImplementation "androidx.compose.ui:ui-tooling:$composeVersion"
+    implementation "androidx.navigation:navigation-compose:$navigationComposeVersion"
 }

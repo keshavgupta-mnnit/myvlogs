@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp' version '1.7.20-1.0.8'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -35,6 +37,14 @@ android {
         kotlinCompilerExtensionVersion composeCompilerVersion
         kotlinCompilerVersion kotlinVersion
     }
+
+    libraryVariants.all { variant ->
+        kotlin.sourceSets {
+            getByName(variant.name) {
+                kotlin.srcDir("build/generated/ksp/${variant.name}/kotlin")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -57,7 +67,6 @@ dependencies {
 
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$composeVersion"
     debugImplementation "androidx.compose.ui:ui-tooling:$composeVersion"
-    implementation "androidx.navigation:navigation-compose:$navigationComposeVersion"
 
 //    Image Compose
     implementation "io.coil-kt:coil-compose:$coilImageVersion"
@@ -65,4 +74,11 @@ dependencies {
     // Paging Compose
     implementation "com.google.accompanist:accompanist-pager:$pagerComposeVersion"
     implementation "com.google.accompanist:accompanist-pager-indicators:$pagerComposeVersion"
+
+    // navigation compose
+    implementation "androidx.navigation:navigation-compose:$navigationComposeVersion"
+
+    // compose destinations
+    implementation "io.github.raamcosta.compose-destinations:core:$destinationComposeVersion"
+    ksp "io.github.raamcosta.compose-destinations:ksp:$destinationComposeVersion"
 }

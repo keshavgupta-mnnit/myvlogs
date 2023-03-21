@@ -1,6 +1,10 @@
 package com.kgcorp.corevloglibrary.models
 
-sealed class PostItemModel
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+sealed class PostItemModel : Parcelable
 
 data class ImagePostItemModel(
     val imageUrl: String,

@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kgcorp.corevloglibrary.R
-import com.kgcorp.corevloglibrary.components.destinations.VlogDetailScreenDestination
+import com.kgcorp.corevloglibrary.components.destinations.CreateVlogScreenDestination
 import com.kgcorp.corevloglibrary.models.VlogDetailsModel
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -39,7 +39,8 @@ fun CompleteVlogItem(
             .background(Color.White),
         onClick = {
             navigator.navigate(
-                VlogDetailScreenDestination(model)
+                CreateVlogScreenDestination()
+//                VlogDetailScreenDestination(model)
             )
         }
     ) {

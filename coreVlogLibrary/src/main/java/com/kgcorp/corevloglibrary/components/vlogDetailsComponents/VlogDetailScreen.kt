@@ -1,7 +1,6 @@
 package com.kgcorp.corevloglibrary.components.vlogDetailsComponents
 
 import androidx.compose.runtime.Composable
-import com.kgcorp.corevloglibrary.components.VlogDetails
 import com.kgcorp.corevloglibrary.models.ImagePostItemModel
 import com.kgcorp.corevloglibrary.models.MultipleImagePostItemModel
 import com.kgcorp.corevloglibrary.models.TextPostItemModel

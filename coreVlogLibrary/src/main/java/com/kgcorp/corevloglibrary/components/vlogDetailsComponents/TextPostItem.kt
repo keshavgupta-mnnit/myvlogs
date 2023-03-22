@@ -1,8 +1,9 @@
-package com.kgcorp.corevloglibrary.components
+package com.kgcorp.corevloglibrary.components.vlogDetailsComponents
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,12 +14,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.kgcorp.corevloglibrary.models.TextPostItemModel
 
-@Composable
-fun TextPostItem(textItem: TextPostItemModel) {
-    LazyColumn(modifier = Modifier.padding(top = 8.dp)) {
-        items(textItem.txt) { item ->
-            SingleTextPostItem(item)
-        }
+
+fun LazyListScope.TextPostItem(textItem: TextPostItemModel) {
+    items(textItem.txt) { item ->
+        SingleTextPostItem(item)
     }
 }
 
@@ -38,9 +37,11 @@ fun SingleTextPostItem(data: String) {
 @Preview(showBackground = true)
 @Composable
 fun TextPostItemPreview() {
-    TextPostItem(
-        TextPostItemModel(
-            listOf("This is just for sample", "This is just for description sample")
+    LazyColumn(modifier = Modifier.padding(top = 8.dp)) {
+        TextPostItem(
+            TextPostItemModel(
+                listOf("This is just for sample", "This is just for description sample")
+            )
         )
-    )
+    }
 }

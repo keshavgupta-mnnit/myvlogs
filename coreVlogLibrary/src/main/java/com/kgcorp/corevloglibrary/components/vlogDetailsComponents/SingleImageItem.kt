@@ -1,4 +1,4 @@
-package com.kgcorp.corevloglibrary.components
+package com.kgcorp.corevloglibrary.components.vlogDetailsComponents
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

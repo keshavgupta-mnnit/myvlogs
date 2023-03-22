@@ -5,6 +5,17 @@ plugins {
     id 'kotlin-parcelize'
 }
 
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
+}
+
 android {
     namespace 'com.kgcorp.corevloglibrary'
     compileSdk 33
@@ -38,13 +49,13 @@ android {
         kotlinCompilerVersion kotlinVersion
     }
 
-    libraryVariants.all { variant ->
-        kotlin.sourceSets {
-            getByName(variant.name) {
-                kotlin.srcDir("build/generated/ksp/${variant.name}/kotlin")
-            }
-        }
-    }
+//    libraryVariants.all { variant ->
+//        kotlin.sourceSets {
+//            getByName(variant.name) {
+//                kotlin.srcDir("build/generated/ksp/${variant.name}/kotlin")
+//            }
+//        }
+//    }
 }
 
 dependencies {

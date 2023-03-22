@@ -1,6 +1,5 @@
-package com.kgcorp.corevloglibrary.components
+package com.kgcorp.corevloglibrary.components.vlogDetailsComponents
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
@@ -15,7 +14,6 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import com.kgcorp.corevloglibrary.models.ImagePostItemModel
 import com.kgcorp.corevloglibrary.models.MultipleImagePostItemModel
 
 @OptIn(ExperimentalPagerApi::class)

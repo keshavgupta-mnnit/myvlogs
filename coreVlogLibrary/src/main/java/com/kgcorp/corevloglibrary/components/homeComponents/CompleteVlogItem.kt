@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.kgcorp.corevloglibrary.R
 import com.kgcorp.corevloglibrary.components.destinations.CreateVlogScreenDestination
-import com.kgcorp.corevloglibrary.models.VlogDetailsModel
+import com.kgcorp.corevloglibrary.models.datamodels.VlogDetailsModel
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -123,7 +123,7 @@ fun CompleteVlogItemPreview() {
 //                    "https://media.istockphoto.com/id/531444381/photo/glacier-bay-in-mountains-alaska-united-states.webp?s=1024x1024&w=is&k=20&c=z6PA2NF144Y3xubzQYJquvMH1K2LLYVAJKYjeycWLX4=",
 //                    "Journey towards end",
 //                ),
-//                MultipleImagePostItemModel(
+//                ImagePostItemModel(
 //                    listOf(
 //                        "https://cdn.pixabay.com/photo/2023/01/01/21/33/mountain-7690893_1280.jpg",
 //                        "https://media.istockphoto.com/id/531444381/photo/glacier-bay-in-mountains-alaska-united-states.webp?s=1024x1024&w=is&k=20&c=z6PA2NF144Y3xubzQYJquvMH1K2LLYVAJKYjeycWLX4=",

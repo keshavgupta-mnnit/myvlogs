@@ -14,26 +14,25 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import com.kgcorp.corevloglibrary.models.MultipleImagePostItemModel
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun MultipleImageItem(model: MultipleImagePostItemModel) {
+fun MultipleImageItem(imageUrls: List<String>, description: String) {
     Box(
         Modifier.background(Color.White)
     ) {
         Column {
             val pager = rememberPagerState(
-                pageCount = model.imageUrls.size,
+                pageCount = imageUrls.size,
             )
-            SingleTextPostItem(data = model.description)
+            SingleTextPostItem(data = description)
             HorizontalPager(
                 state = pager,
                 itemSpacing = 8.dp
             ) { item ->
                 AsyncImage(
                     contentScale = ContentScale.FillBounds,
-                    model = model.imageUrls[item],
+                    model = imageUrls[item],
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -56,13 +55,11 @@ fun MultipleImageItem(model: MultipleImagePostItemModel) {
 @Composable
 fun MultipleImageItemPreview() {
     MultipleImageItem(
-        MultipleImagePostItemModel(
-            listOf(
-                "https://cdn.pixabay.com/photo/2023/01/01/21/33/mountain-7690893_1280.jpg",
-                "https://media.istockphoto.com/id/531444381/photo/glacier-bay-in-mountains-alaska-united-states.webp?s=1024x1024&w=is&k=20&c=z6PA2NF144Y3xubzQYJquvMH1K2LLYVAJKYjeycWLX4=",
-                "https://media.istockphoto.com/id/119889938/photo/waterfall-in-deep-forest.webp?s=1024x1024&w=is&k=20&c=nm4bomRW_IG4juvYI1vtSTw0xplCuMOyEMK8zBvvrCM="
-            ),
-            "This is just for description sample",
-        )
+        listOf(
+            "https://cdn.pixabay.com/photo/2023/01/01/21/33/mountain-7690893_1280.jpg",
+            "https://media.istockphoto.com/id/531444381/photo/glacier-bay-in-mountains-alaska-united-states.webp?s=1024x1024&w=is&k=20&c=z6PA2NF144Y3xubzQYJquvMH1K2LLYVAJKYjeycWLX4=",
+            "https://media.istockphoto.com/id/119889938/photo/waterfall-in-deep-forest.webp?s=1024x1024&w=is&k=20&c=nm4bomRW_IG4juvYI1vtSTw0xplCuMOyEMK8zBvvrCM="
+        ),
+        "This is just for description sample",
     )
 }

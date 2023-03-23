@@ -8,10 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.kgcorp.corevloglibrary.models.ImagePostItemModel
-import com.kgcorp.corevloglibrary.models.MultipleImagePostItemModel
-import com.kgcorp.corevloglibrary.models.TextPostItemModel
-import com.kgcorp.corevloglibrary.models.VlogDetailsModel
+import com.kgcorp.corevloglibrary.models.datamodels.ImagePostItemModel
+import com.kgcorp.corevloglibrary.models.datamodels.TextPostItemModel
+import com.kgcorp.corevloglibrary.models.datamodels.VlogDetailsModel
 
 @Composable
 fun VlogDetails(model: VlogDetailsModel) {
@@ -30,14 +29,16 @@ fun VlogDetails(model: VlogDetailsModel) {
                     TextPostItem(textItem = vlogItem)
                 }
                 is ImagePostItemModel -> {
-                    item {
-                        SingleImageItem(imagePostItemModel = vlogItem)
+                    if (vlogItem.imageUrls.size == 1) {
+                        item {
+                            SingleImageItem(vlogItem.imageUrls[0], vlogItem.description)
+                        }
+                    } else {
+                        item {
+                            MultipleImageItem(vlogItem.imageUrls, vlogItem.description)
+                        }
                     }
-                }
-                is MultipleImagePostItemModel -> {
-                    item {
-                        MultipleImageItem(model = vlogItem)
-                    }
+
                 }
             }
         }

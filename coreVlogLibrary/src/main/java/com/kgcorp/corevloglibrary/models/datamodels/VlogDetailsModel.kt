@@ -1,4 +1,4 @@
-package com.kgcorp.corevloglibrary.models
+package com.kgcorp.corevloglibrary.models.datamodels
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

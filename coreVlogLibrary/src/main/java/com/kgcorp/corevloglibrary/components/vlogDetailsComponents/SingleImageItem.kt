@@ -9,17 +9,16 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.kgcorp.corevloglibrary.models.ImagePostItemModel
 
 @Composable
-fun SingleImageItem(imagePostItemModel: ImagePostItemModel) {
+fun SingleImageItem(imageUrl: String, description: String) {
     Box(
         Modifier.background(Color.White)
     ) {
         Column {
             AsyncImage(
                 contentScale = ContentScale.Crop,
-                model =imagePostItemModel.imageUrl,
+                model = imageUrl,
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -28,7 +27,7 @@ fun SingleImageItem(imagePostItemModel: ImagePostItemModel) {
                     .fillMaxWidth()
             )
 
-            SingleTextPostItem(data = imagePostItemModel.description)
+            SingleTextPostItem(data = description)
         }
     }
 }
@@ -38,9 +37,7 @@ fun SingleImageItem(imagePostItemModel: ImagePostItemModel) {
 @Composable
 fun SingleImageItemPreview() {
     SingleImageItem(
-        ImagePostItemModel(
-            "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fgirl-on-beach&psig=AOvVaw3w3V8ctiEFkS_yxdao_PFv&ust=1679339936917000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCMiIz_Ta6P0CFQAAAAAdAAAAABAE",
-            "This is just for description sample",
-        )
+        "https://www.google.com/url?sa=i&url=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fgirl-on-beach&psig=AOvVaw3w3V8ctiEFkS_yxdao_PFv&ust=1679339936917000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCMiIz_Ta6P0CFQAAAAAdAAAAABAE",
+        "This is just for description sample",
     )
 }

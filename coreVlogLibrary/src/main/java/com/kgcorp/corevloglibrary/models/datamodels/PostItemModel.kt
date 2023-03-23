@@ -5,7 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 sealed class PostItemModel : Parcelable
-
 data class ImagePostItemModel(
     val imageUrls: List<String>,
     val description: String

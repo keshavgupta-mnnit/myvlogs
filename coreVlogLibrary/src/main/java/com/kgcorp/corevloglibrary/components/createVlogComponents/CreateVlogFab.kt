@@ -21,8 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.kgcorp.corevloglibrary.models.uimodels.FabActionItemModel
 
 @Composable
 fun CreateVlogFab(
@@ -51,12 +51,6 @@ fun CreateVlogFab(
         }
     }
 }
-
-data class FabActionItemModel(
-    val icon: ImageVector,
-    val title: String,
-    val onClick: () -> Unit
-)
 
 @Composable
 fun FabActionItem(model: FabActionItemModel) {

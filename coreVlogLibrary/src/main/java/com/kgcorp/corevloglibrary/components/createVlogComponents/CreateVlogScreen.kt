@@ -10,6 +10,9 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import com.kgcorp.corevloglibrary.R
+import com.kgcorp.corevloglibrary.models.datamodels.PostItemModel
+import com.kgcorp.corevloglibrary.models.datamodels.TextPostItemModel
+import com.kgcorp.corevloglibrary.models.uimodels.FabActionItemModel
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -19,12 +22,29 @@ fun CreateVlogScreen() {
         mutableStateOf(false)
     }
     val ctx = LocalContext.current
+
+    var isDialog by remember {
+        mutableStateOf(false)
+    }
+    if(isDialog)
+        CustomAddItemDialog(
+            content = { /*TODO*/ },
+            onAddClick = { i: Int, postItemModel: PostItemModel ->
+                Toast.makeText(ctx, "i: $i postItemModel: ${(postItemModel as TextPostItemModel).txt[0]}", Toast.LENGTH_LONG).show()
+                isDialog = false
+            } ,
+            onDismiss = { isDialog = false },
+            title = "Add Text",
+            subtitle = "Likhdo bhai kuch panktiya"
+        )
+
     val fabMenu = listOf(
         FabActionItemModel(
             ImageVector.vectorResource(id = R.drawable.ic_heart),
             "Text Only"
         ) {
-            Toast.makeText(ctx, "Text Only", Toast.LENGTH_LONG).show()
+//            Toast.makeText(ctx, "Text Only", Toast.LENGTH_LONG).show()
+            isDialog = true
         },
         FabActionItemModel(
             ImageVector.vectorResource(id = R.drawable.ic_view),

@@ -2,6 +2,8 @@ package com.kgcorp.corevloglibrary.components.createVlogComponents
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -10,6 +12,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import com.kgcorp.corevloglibrary.R
+import com.kgcorp.corevloglibrary.components.vlogDetailsComponents.MultipleImageItem
+import com.kgcorp.corevloglibrary.components.vlogDetailsComponents.SingleImageItem
+import com.kgcorp.corevloglibrary.components.vlogDetailsComponents.TextPostItem
+import com.kgcorp.corevloglibrary.models.datamodels.ImagePostItemModel
 import com.kgcorp.corevloglibrary.models.datamodels.PostItemModel
 import com.kgcorp.corevloglibrary.models.datamodels.TextPostItemModel
 import com.kgcorp.corevloglibrary.models.uimodels.FabActionItemModel
@@ -18,6 +24,9 @@ import com.ramcosta.composedestinations.annotation.Destination
 @Destination
 @Composable
 fun CreateVlogScreen() {
+    val itemsList = remember {
+        mutableStateListOf<PostItemModel>()
+    }
     var isFabActive by remember {
         mutableStateOf(false)
     }
@@ -30,7 +39,7 @@ fun CreateVlogScreen() {
         CustomAddItemDialog(
             content = { /*TODO*/ },
             onAddClick = { i: Int, postItemModel: PostItemModel ->
-                Toast.makeText(ctx, "i: $i postItemModel: ${(postItemModel as TextPostItemModel).txt[0]}", Toast.LENGTH_LONG).show()
+                itemsList.add(postItemModel)
                 isDialog = false
             } ,
             onDismiss = { isDialog = false },
@@ -43,7 +52,6 @@ fun CreateVlogScreen() {
             ImageVector.vectorResource(id = R.drawable.ic_heart),
             "Text Only"
         ) {
-//            Toast.makeText(ctx, "Text Only", Toast.LENGTH_LONG).show()
             isDialog = true
         },
         FabActionItemModel(
@@ -56,7 +64,28 @@ fun CreateVlogScreen() {
     Scaffold(floatingActionButton = {
         CreateVlogFab(isFabActive, fabMenu) { isFabActive = it }
     }) { padding ->
-        Text(modifier = Modifier.padding(padding), text = "Hi")
+        LazyColumn(modifier = Modifier.padding(padding)){
+            itemsList.forEach { vlogItem->
+                when (vlogItem) {
+                    is TextPostItemModel -> {
+                        TextPostItem(textItem = vlogItem)
+                    }
+                    is ImagePostItemModel -> {
+                        if (vlogItem.imageUrls.size == 1) {
+                            item {
+                                SingleImageItem(vlogItem.imageUrls[0], vlogItem.description)
+                            }
+                        } else {
+                            item {
+                                MultipleImageItem(vlogItem.imageUrls, vlogItem.description)
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }
     }
 
 }

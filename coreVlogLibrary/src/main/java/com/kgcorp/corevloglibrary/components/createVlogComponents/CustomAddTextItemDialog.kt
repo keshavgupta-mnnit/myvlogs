@@ -28,7 +28,7 @@ import com.kgcorp.corevloglibrary.models.datamodels.TextPostItemModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun CustomAddItemDialog(
+fun CustomAddTextItemDialog(
     content: @Composable () -> Unit,
     onAddClick: (Int, PostItemModel) -> Unit,
     onDismiss: () -> Unit,

@@ -3,9 +3,7 @@ package com.kgcorp.corevloglibrary.components.createVlogComponents
 import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -35,8 +33,11 @@ fun CreateVlogScreen() {
     var isDialog by remember {
         mutableStateOf(false)
     }
+    var isDialog2 by remember {
+        mutableStateOf(false)
+    }
     if(isDialog)
-        CustomAddItemDialog(
+        CustomAddTextItemDialog(
             content = { /*TODO*/ },
             onAddClick = { i: Int, postItemModel: PostItemModel ->
                 itemsList.add(postItemModel)
@@ -45,6 +46,18 @@ fun CreateVlogScreen() {
             onDismiss = { isDialog = false },
             title = "Add Text",
             subtitle = "Likhdo bhai kuch panktiya"
+        )
+
+    if(isDialog2)
+        CustomAddImageItemDialog(
+            content = { /*TODO*/ },
+            onAddClick = { i: Int, postItemModel: PostItemModel ->
+                itemsList.add(postItemModel)
+                isDialog2 = false
+            } ,
+            onDismiss = { isDialog2 = false },
+            title = "Add Image",
+            subtitle = "Kuch photu dedo"
         )
 
     val fabMenu = listOf(
@@ -58,7 +71,7 @@ fun CreateVlogScreen() {
             ImageVector.vectorResource(id = R.drawable.ic_view),
             "With Image"
         ) {
-            Toast.makeText(ctx, "With Image", Toast.LENGTH_LONG).show()
+            isDialog2 = true
         }
     )
     Scaffold(floatingActionButton = {
@@ -75,7 +88,7 @@ fun CreateVlogScreen() {
                             item {
                                 SingleImageItem(vlogItem.imageUrls[0], vlogItem.description)
                             }
-                        } else {
+                        } else if (vlogItem.imageUrls.size > 1){
                             item {
                                 MultipleImageItem(vlogItem.imageUrls, vlogItem.description)
                             }

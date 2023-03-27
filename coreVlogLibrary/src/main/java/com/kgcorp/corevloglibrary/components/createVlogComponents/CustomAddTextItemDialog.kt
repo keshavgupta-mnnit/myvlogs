@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
@@ -29,11 +28,9 @@ import com.kgcorp.corevloglibrary.models.datamodels.TextPostItemModel
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CustomAddTextItemDialog(
-    content: @Composable () -> Unit,
     onAddClick: (Int, PostItemModel) -> Unit,
     onDismiss: () -> Unit,
     title: String,
-    subtitle: String,
     position: Int = -1,
 ) {
     val inputList = remember {
@@ -67,14 +64,6 @@ fun CustomAddTextItemDialog(
                                 onDismiss()
                             })
                 }
-
-                Spacer(modifier = Modifier.padding(8.dp))
-                Text(
-                    text = subtitle,
-                    style = MaterialTheme.typography.caption,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
                 LazyColumn {
 
                     item {

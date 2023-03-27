@@ -1,6 +1,5 @@
 package com.kgcorp.corevloglibrary.components.createVlogComponents
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Scaffold
@@ -19,6 +18,11 @@ import com.kgcorp.corevloglibrary.models.datamodels.TextPostItemModel
 import com.kgcorp.corevloglibrary.models.uimodels.FabActionItemModel
 import com.ramcosta.composedestinations.annotation.Destination
 
+
+enum class CreateVlogDialogState {
+    HIDDEN, SHOW_ADD_IMAGE, SHOW_ADD_TEXT
+}
+
 @Destination
 @Composable
 fun CreateVlogScreen() {
@@ -30,48 +34,42 @@ fun CreateVlogScreen() {
     }
     val ctx = LocalContext.current
 
-    var isDialog by remember {
-        mutableStateOf(false)
+    var isDialogState by remember {
+        mutableStateOf(CreateVlogDialogState.HIDDEN)
     }
-    var isDialog2 by remember {
-        mutableStateOf(false)
-    }
-    if(isDialog)
+
+    if(isDialogState == CreateVlogDialogState.SHOW_ADD_TEXT)
         CustomAddTextItemDialog(
-            content = { /*TODO*/ },
             onAddClick = { i: Int, postItemModel: PostItemModel ->
                 itemsList.add(postItemModel)
-                isDialog = false
+                isDialogState = CreateVlogDialogState.HIDDEN
             } ,
-            onDismiss = { isDialog = false },
-            title = "Add Text",
-            subtitle = "Likhdo bhai kuch panktiya"
+            onDismiss = { isDialogState = CreateVlogDialogState.HIDDEN },
+            title = "Add Text"
         )
 
-    if(isDialog2)
+    if(isDialogState == CreateVlogDialogState.SHOW_ADD_IMAGE)
         CustomAddImageItemDialog(
-            content = { /*TODO*/ },
             onAddClick = { i: Int, postItemModel: PostItemModel ->
                 itemsList.add(postItemModel)
-                isDialog2 = false
+                isDialogState = CreateVlogDialogState.HIDDEN
             } ,
-            onDismiss = { isDialog2 = false },
-            title = "Add Image",
-            subtitle = "Kuch photu dedo"
+            onDismiss = { isDialogState = CreateVlogDialogState.HIDDEN },
+            title = "Add Image"
         )
 
     val fabMenu = listOf(
         FabActionItemModel(
-            ImageVector.vectorResource(id = R.drawable.ic_heart),
+            ImageVector.vectorResource(id = R.drawable.ic_add_text),
             "Text Only"
         ) {
-            isDialog = true
+            isDialogState = CreateVlogDialogState.SHOW_ADD_TEXT
         },
         FabActionItemModel(
-            ImageVector.vectorResource(id = R.drawable.ic_view),
+            ImageVector.vectorResource(id = R.drawable.ic_add_photo),
             "With Image"
         ) {
-            isDialog2 = true
+            isDialogState = CreateVlogDialogState.SHOW_ADD_IMAGE
         }
     )
     Scaffold(floatingActionButton = {
@@ -93,12 +91,9 @@ fun CreateVlogScreen() {
                                 MultipleImageItem(vlogItem.imageUrls, vlogItem.description)
                             }
                         }
-
                     }
                 }
             }
-
         }
     }
-
 }

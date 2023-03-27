@@ -60,7 +60,7 @@ fun FabActionItem(model: FabActionItemModel) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
-                .size(32.dp)
+                .size(40.dp)
                 .clip(CircleShape)
                 .background(MaterialTheme.colors.secondary, CircleShape)
                 .clickable(
@@ -72,7 +72,7 @@ fun FabActionItem(model: FabActionItemModel) {
             Icon(
                 imageVector = model.icon,
                 contentDescription = "",
-                modifier = Modifier.fillMaxSize(.75f)
+                modifier = Modifier.fillMaxSize(.5f)
             )
         }
     }

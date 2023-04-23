@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.kgcorp.corevloglibrary.components.common.RemovableContentHolder
 
 @Composable
 fun AddSingleImageItem(imageSrc: MutableState<String>) {
@@ -21,16 +22,19 @@ fun AddSingleImageItem(imageSrc: MutableState<String>) {
                 imageSrc.value = uri.toString()
             })
     if (imageSrc.value.isNotEmpty()) {
-        AsyncImage(
-            contentScale = ContentScale.Crop,
-            model = imageSrc.value,
-            contentDescription = null,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(280.dp)
-                .padding(all = 4.dp)
-                .fillMaxWidth()
-        )
+        RemovableContentHolder(onRemoveClick = { imageSrc.value = "" }) {
+            AsyncImage(
+                contentScale = ContentScale.Crop,
+                model = imageSrc.value,
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(280.dp)
+                    .padding(all = 4.dp)
+                    .fillMaxWidth()
+            )
+        }
+
     } else {
         AddImageCard {
             photoClickLauncher.launch(

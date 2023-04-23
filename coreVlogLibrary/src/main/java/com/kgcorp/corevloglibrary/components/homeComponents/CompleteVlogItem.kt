@@ -65,7 +65,6 @@ fun CompleteVlogItem(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 8.dp)
             ) {
                 IconWithInfo(
                     icon = painterResource(id = R.drawable.ic_view),

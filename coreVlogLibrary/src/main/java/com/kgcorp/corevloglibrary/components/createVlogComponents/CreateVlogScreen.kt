@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.kgcorp.corevloglibrary.R
 import com.kgcorp.corevloglibrary.Util
 import com.kgcorp.corevloglibrary.components.common.HeaderActionBar
+import com.kgcorp.corevloglibrary.components.common.RemovableContentHolder
 import com.kgcorp.corevloglibrary.components.vlogDetailsComponents.MultipleImageItem
 import com.kgcorp.corevloglibrary.components.vlogDetailsComponents.SingleImageItem
 import com.kgcorp.corevloglibrary.components.vlogDetailsComponents.TextPostItem
@@ -112,11 +113,19 @@ fun CreateVlogScreen(
                     is ImagePostItemModel -> {
                         if (vlogItem.imageUrls.size == 1) {
                             item {
-                                SingleImageItem(vlogItem.imageUrls[0], vlogItem.description)
+                                RemovableContentHolder(onRemoveClick = {
+                                    itemsList.remove(vlogItem)
+                                }, content = {
+                                    SingleImageItem(vlogItem.imageUrls[0], vlogItem.description)
+                                })
                             }
                         } else if (vlogItem.imageUrls.size > 1) {
                             item {
-                                MultipleImageItem(vlogItem.imageUrls, vlogItem.description)
+                                RemovableContentHolder(onRemoveClick = {
+                                    itemsList.remove(vlogItem)
+                                }, content = {
+                                    MultipleImageItem(vlogItem.imageUrls, vlogItem.description)
+                                })
                             }
                         }
                     }

@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -42,5 +44,6 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$junitExtVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
 
-
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
 }

@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.devtools.ksp' version '1.7.20-1.0.8'
     id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+
 }
 
 kotlin {
@@ -92,4 +95,9 @@ dependencies {
     // compose destinations
     implementation "io.github.raamcosta.compose-destinations:core:$destinationComposeVersion"
     ksp "io.github.raamcosta.compose-destinations:ksp:$destinationComposeVersion"
+
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+
 }

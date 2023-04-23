@@ -1,9 +1,7 @@
 package com.kgcorp.corevloglibrary.components.homeComponents
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -14,18 +12,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.kgcorp.corevloglibrary.Util
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.kgcorp.corevloglibrary.components.common.SearchBar
 import com.kgcorp.corevloglibrary.components.destinations.CreateVlogScreenDestination
+import com.kgcorp.corevloglibrary.data.VlogRepositoryImpl
+import com.kgcorp.corevloglibrary.data.local.VlogLocalSourceImpl
+import com.kgcorp.corevloglibrary.data.remote.VlogRemoteSourceImpl
 import com.kgcorp.corevloglibrary.models.uimodels.HomeScreenNavItems
+import com.kgcorp.corevloglibrary.viewmodels.HomeViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination(start = true)
 @Composable
 fun HomeScreen(
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
+    viewmodel: HomeViewModel = hiltViewModel()
 ) {
+    val searchString = remember {
+        mutableStateOf("")
+    }
     Scaffold(
         backgroundColor = MaterialTheme.colors.background,
         floatingActionButton = {
@@ -46,12 +54,20 @@ fun HomeScreen(
         isFloatingActionButtonDocked = true,
         bottomBar = { HomeBottomNavItem() }
     ) { padding ->
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier.padding(padding)
+        Column(
+            Modifier
+                .fillMaxSize()
+                .background(Color.Black)
         ) {
-            items(Util.dummyData) {
-                CompleteVlogItem(model = it, navigator)
+            SearchBar(searchString)
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                modifier = Modifier.padding(padding)
+            ) {
+                items(viewmodel.getData().filter { it.title.contains(searchString.value, true) }) {
+                    Spacer(modifier = Modifier.size(8.dp))
+                    CompleteVlogItem(model = it, navigator)
+                }
             }
         }
     }
@@ -64,7 +80,7 @@ fun HomeBottomNavItem() {
         mutableStateOf(0)
     }
     BottomAppBar(
-        backgroundColor = MaterialTheme.colors.surface,
+        backgroundColor = MaterialTheme.colors.secondaryVariant,
         cutoutShape = CircleShape,
         contentPadding = PaddingValues(horizontal = 50.dp),
         elevation = 2.dp
